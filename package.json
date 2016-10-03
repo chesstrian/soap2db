@@ -8,12 +8,13 @@
   },
   "dependencies": {
     "config": "^1.21.0",
+    "moment": "^2.15.1",
     "soap": "^0.17.0"
   },
   "author": {
     "name": "Christian Gutierrez Sierra",
     "email": "chesstrian@gmail.com"
   },
-  "repository": "",
+  "repository": "git@github.com:chesstrian/soap2db.git",
   "license": "UNLICENSED"
 }
