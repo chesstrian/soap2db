@@ -1,0 +1,18 @@
+{
+  "name": "soap2db",
+  "version": "1.0.0",
+  "description": "Node Service to take data from a Soap service and save into a MS-SQL Database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "soap": "^0.17.0"
+  },
+  "author": {
+    "name": "Christian Gutierrez Sierra",
+    "email": "chesstrian@gmail.com"
+  },
+  "repository": "",
+  "license": "UNLICENSED"
+}
