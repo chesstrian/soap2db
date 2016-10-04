@@ -9,6 +9,7 @@
   "dependencies": {
     "config": "^1.21.0",
     "moment": "^2.15.1",
+    "mssql": "^3.3.0",
     "soap": "^0.17.0"
   },
   "author": {

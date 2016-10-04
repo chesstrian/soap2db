@@ -1,4 +1,6 @@
+var config = require('config');
 var moment = require("moment");
+var sql = require('mssql');
 
 var lib = require("./lib/index");
 
@@ -30,3 +32,14 @@ lib.getToken(function (err, token) {
     console.log(odds);
   });
 });
+
+sql.connect(config.get("mssql_uri"))
+  .then(function () {
+    new sql.Request().query("SELECT * FROM dboEvent");
+  })
+  .then(function (recordSet) {
+    console.log('RecordSet:', recordSet);
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
