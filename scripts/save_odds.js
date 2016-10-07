@@ -11,18 +11,19 @@ var insertOddStatement = function (odd) {
     "( " + parseInt(odd.event_id) +
     ", " + parseInt(odd.book_id) +
     ", " + parseInt(odd.league_id) +
-    ", " + parseInt(odd.away_rot) +
-    ", " + parseInt(odd.away_point) +  // TODO: Is this AwaySpread?
-    ", " + parseInt(odd.away_point_money) +  // TODO: Is this AwayJuice?
-    ", " + parseInt(odd.away_money_line) +
-    ", " + parseInt(odd.home_point) +  // TODO: Is this HomeSpread?
-    ", " + parseInt(odd.home_point_money) +  // TODO: Is this HomeJuice?
-    ", " + parseInt(odd.home_money_line) +
-    ", " + parseInt(odd.total) +
-    ", " + parseInt(odd.over_money) +
-    ", " + parseInt(odd.under_money) +
-    ", " + parseInt(odd.draw_money_line) +
-    ", " + odd.last_update + " )";
+    ", " + parseInt(odd.period_id) +
+    ", " + parseInt(odd.away_rot || 0) +
+    ", " + parseFloat(odd.away_point || 0) +  // TODO: Is this AwaySpread?
+    ", " + parseInt(odd.away_point_money || 0) +  // TODO: Is this AwayJuice?
+    ", " + parseInt(odd.away_money_line || 0) +
+    ", " + parseFloat(odd.home_point || 0) +  // TODO: Is this HomeSpread?
+    ", " + parseInt(odd.home_point_money || 0) +  // TODO: Is this HomeJuice?
+    ", " + parseInt(odd.home_money_line || 0) +
+    ", " + parseFloat(odd.total || 0) +
+    ", " + parseInt(odd.over_money || 0) +
+    ", " + parseInt(odd.under_money || 0) +
+    ", " + parseInt(odd.draw_money_line || 0) +
+    ", " + "'" + odd.last_update + "' )";
 };
 
 lib.getToken(function (err, token) {
