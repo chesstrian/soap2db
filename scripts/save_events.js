@@ -28,46 +28,44 @@ var insertParticipantStatement = function (eventId, participant) {
       "' " + "'" + participant.short_name + "' )";
 };
 
-lib.getToken(function (err, token) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  console.log('Token:', token);
-
-  lib.getEvents(token, function (err, events) {
+module.exports = function () {
+  lib.getToken(function (err, token) {
     if (err) {
       console.log(err);
       return;
     }
 
-    console.log('Processing', events.length, 'events');
+    console.log('Token:', token);
 
-    sql.connect(config.get("mssql_uri"))
-      .then(function () {
-        events.forEach(function (event) {
-          new sql.Request()
-            .input('event_id', sql.Int, parseInt(event.id))
-            .query("SELECT * FROM Event WHERE ReferenceId = @event_id")
-            .then(function (record) {
-              var transaction = new sql.Transaction();
-              
-              if (record.length == 0) {
-                lib.runStatement(transaction, insertEventStatement(event));
+    lib.getEvents(token, function (err, events) {
+      if (err) {
+        console.log(err);
+        return;
+      }
 
-                if (event.participants != null) {
-                  event.participants.SMTOParticipant.forEach(function (participant) {
-                    lib.runStatement(transaction, insertParticipantStatement(parseInt(event.id), participant));
-                  });
-                }
-              } else if (record[0].InGame != (event.in_game == 'true')) {
-                lib.runStatement(transaction, updateEventStatement(parseInt(event.id)));
+      console.log('Processing', events.length, 'events');
+
+      events.forEach(function (event) {
+        new sql.Request()
+          .input('event_id', sql.Int, parseInt(event.id))
+          .query("SELECT * FROM Event WHERE ReferenceId = @event_id")
+          .then(function (record) {
+            var transaction = new sql.Transaction();
+
+            if (record.length == 0) {
+              lib.runStatement(transaction, insertEventStatement(event));
+
+              if (event.participants != null) {
+                event.participants.SMTOParticipant.forEach(function (participant) {
+                  lib.runStatement(transaction, insertParticipantStatement(parseInt(event.id), participant));
+                });
               }
-            })
-            .catch(function (err) { console.log(err); });
-        });
-      })
-      .catch(function (err) { console.log(err); });
+            } else if (record[0].InGame != (event.in_game == 'true')) {
+              lib.runStatement(transaction, updateEventStatement(parseInt(event.id)));
+            }
+          })
+          .catch(function (err) { console.log(err); });
+      });
+    });
   });
-});
+};
