@@ -38,9 +38,11 @@ sql.connect(config.get("mssql_uri"))
     new sql.Request().query("SELECT * FROM Event")
       .then(function (recordSet) {
         console.log('RecordSet:', recordSet);
+        sql.close();
       })
       .catch(function (err) {
         console.log(err);
+        sql.close();
       });
   })
   .catch(function (err) {

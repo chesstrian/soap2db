@@ -5,13 +5,13 @@ var lib = require("../lib/index");
 
 var insertEventStatement = function (event) {
   return "INSERT INTO Event (Description, IsProp, InGame, LeagueId, ScheduledTime, StartTime, ReferenceId) VALUES " +
-      "( " + "'" + event.description + "'" +
-      ", " + (event.is_prop == 'true' ? 1 : 0) +
-      ", " + (event.in_game == 'true' ? 1 : 0) +
-      ", " + parseInt(event.league_id) +
-      ", " + "'" + event.scheduled_time + "'" +
-      ", " + "'" + event.start_time + "'" +
-      ", " + parseInt(event.id) + " )";
+    "( " + "'" + event.description + "'" +
+    ", " + (event.is_prop == 'true' ? 1 : 0) +
+    ", " + (event.in_game == 'true' ? 1 : 0) +
+    ", " + parseInt(event.league_id) +
+    ", " + "'" + event.scheduled_time + "'" +
+    ", " + "'" + event.start_time + "'" +
+    ", " + parseInt(event.id) + " )";
 };
 
 var updateEventStatement = function (eventId) {
