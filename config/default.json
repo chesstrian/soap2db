@@ -2,6 +2,5 @@
   "endpoint": "http://74.208.226.147/FeedServiceBR/SMTO.Feed.Service.FeedService.svc?singleWsdl",
   "password": "123456",
   "username": "GoldenTest",
-  "mssql_uri": "mssql://BBBmr0a_feeduser:KGgPx9zZrNqv@mssql1007.ixwebhosting.com/BBBmr0a_feeder",
-  "run_events_each": 60000
+  "mssql_uri": "mssql://BBBmr0a_feeduser:KGgPx9zZrNqv@mssql1007.ixwebhosting.com/BBBmr0a_feeder"
 }

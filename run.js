@@ -1,10 +1,8 @@
-var config = require('config');
-var sql = require('mssql');
+var schedule = require('node-schedule');
 
 var scripts = require('./scripts/index');
 
-sql.connect(config.get("mssql_uri"))
-  .then(function () {
-    scripts.saveEvents() && setTimeout(scripts.saveEvents, config.get('run_events_each'));
-  })
-  .catch(function (err) { console.log(err); });
+schedule.scheduleJob('*/1 * * * *', scripts.saveOdds);
+schedule.scheduleJob('0 0 * * *', scripts.saveEvents);
+
+scripts.saveEvents();

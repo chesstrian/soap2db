@@ -1,15 +1,18 @@
 {
   "name": "soap2db",
   "version": "1.0.0",
+  "private": true,
   "description": "Node Service to take data from a Soap service and save into a MS-SQL Database",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "async": "^2.1.1",
     "config": "^1.21.0",
     "moment": "^2.15.1",
     "mssql": "^3.3.0",
+    "node-schedule": "^1.1.1",
     "soap": "^0.17.0"
   },
   "author": {

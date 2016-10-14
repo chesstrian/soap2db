@@ -12,28 +12,28 @@ lib.getToken(function (err, token) {
 
   console.log(token);
 
-  // lib.getLeagues(token, function (err, leagues) {
-  //   console.log(leagues);
-  // });
-  //
-  // lib.getEvents(token, function (err, events) {
-  //   console.log(events);
-  // });
+  lib.getLeagues(token, function (err, leagues) {
+    console.log(leagues);
+  });
+
+  lib.getEvents(token, function (err, events) {
+    console.log(events);
+  });
 
   lib.getScores(token, function (err, scores) {
     console.log(scores);
   });
 
-  // lib.getSportsbooks(token, function (err, sportbooks) {
-  //   console.log(sportbooks);
-  // });
-  //
-  // lib.getOdds(token, null, null, moment(new Date()).format(), function (err, odds) {
-  //   console.log(odds);
-  // });
+  lib.getSportsbooks(token, function (err, sportbooks) {
+    console.log(sportbooks);
+  });
+
+  lib.getOdds(token, null, null, moment(new Date()).format(), function (err, odds) {
+    console.log(odds);
+  });
 });
 
-/*
+
 sql.connect(config.get("mssql_uri"))
   .then(function () {
     new sql.Request().query("SELECT * FROM Event")
@@ -49,4 +49,3 @@ sql.connect(config.get("mssql_uri"))
   .catch(function (err) {
     console.log(err);
   });
-*/

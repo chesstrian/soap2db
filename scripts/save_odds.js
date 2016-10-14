@@ -26,30 +26,32 @@ var insertOddStatement = function (odd) {
     ", " + "'" + odd.last_update + "' )";
 };
 
-lib.getToken(function (err, token) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  console.log('Token:', token);
-
-  lib.getOdds(token, null, null, moment(new Date()).format(), function (err, odds) {
+module.exports = function () {
+  lib.getToken(function (err, token) {
     if (err) {
       console.log(err);
       return;
     }
 
-    console.log('Processing', odds.length, 'Odds');
+    console.log('Token:', token);
 
-    sql.connect(config.get("mssql_uri"))
-      .then(function () {
-        odds.forEach(function (odd) {
-          var transaction = new sql.Transaction();
+    lib.getOdds(token, null, null, moment(new Date()).format(), function (err, odds) {
+      if (err) {
+        console.log(err);
+        return;
+      }
 
-          lib.runStatement(transaction, insertOddStatement(odd));
-        });
-      })
-      .catch(function (err) { console.log(err); });
+      console.log('Processing', odds.length, 'Odds');
+
+      sql.connect(config.get("mssql_uri"))
+        .then(function () {
+          odds.forEach(function (odd) {
+            var transaction = new sql.Transaction();
+
+            lib.runStatement(transaction, insertOddStatement(odd));
+          });
+        })
+        .catch(function (err) { console.log(err); });
+    });
   });
-});
+};
