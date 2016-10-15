@@ -12,17 +12,17 @@ var insertOddStatement = function (odd) {
     ", " + parseInt(odd.book_id) +
     ", " + parseInt(odd.league_id) +
     ", " + parseInt(odd.period_id) +
-    ", " + parseInt(odd.away_rot || 0) +
-    ", " + parseFloat(odd.away_point || 0) +  // TODO: Is this AwaySpread?
-    ", " + parseInt(odd.away_point_money || 0) +  // TODO: Is this AwayJuice?
-    ", " + parseInt(odd.away_money_line || 0) +
-    ", " + parseFloat(odd.home_point || 0) +  // TODO: Is this HomeSpread?
-    ", " + parseInt(odd.home_point_money || 0) +  // TODO: Is this HomeJuice?
-    ", " + parseInt(odd.home_money_line || 0) +
-    ", " + parseFloat(odd.total || 0) +
-    ", " + parseInt(odd.over_money || 0) +
-    ", " + parseInt(odd.under_money || 0) +
-    ", " + parseInt(odd.draw_money_line || 0) +
+    ", " + (parseInt(odd.away_rot) || null) +
+    ", " + (parseFloat(odd.away_point) || null) +
+    ", " + (parseInt(odd.away_point_money) || null) +
+    ", " + (parseInt(odd.away_money_line) || null) +
+    ", " + (parseFloat(odd.home_point) || null) +
+    ", " + (parseInt(odd.home_point_money) || null) +
+    ", " + (parseInt(odd.home_money_line) || null) +
+    ", " + (parseFloat(odd.total) || null) +
+    ", " + (parseInt(odd.over_money) || null) +
+    ", " + (parseInt(odd.under_money) || null) +
+    ", " + (parseInt(odd.draw_money_line) || null) +
     ", " + "'" + odd.last_update + "' )";
 };
 
