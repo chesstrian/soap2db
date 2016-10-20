@@ -1,5 +1,6 @@
 var async = require('async');
 var config = require('config');
+var moment = require('moment-timezone');
 var sql = require('mssql');
 
 var lib = require("../lib/index");
@@ -78,8 +79,8 @@ module.exports = function () {
                     is_prop: event.is_prop == 'true' ? 1 : 0,
                     in_game: event.in_game == 'true' ? 1 : 0,
                     league_id: parseInt(event.league_id),
-                    scheduled_time: new Date(event.scheduled_time),
-                    start_time: new Date(event.start_time),
+                    scheduled_time: moment.tz(event.scheduled_time, "America/Los_Angeles").tz('America/New_York'),
+                    start_time: moment.tz(event.start_time, "America/Los_Angeles").tz('America/New_York'),
                     reference_id: parseInt(event.id)
                   }, next);
                 }, function (err) {

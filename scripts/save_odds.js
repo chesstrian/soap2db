@@ -1,6 +1,6 @@
 var async = require('async');
 var config = require('config');
-var moment = require('moment');
+var moment = require('moment-timezone');
 var sql = require('mssql');
 
 var lib = require("../lib/index");
@@ -76,7 +76,7 @@ module.exports = function () {
                 total_over_money_line: parseInt(odd.over_money) || null,
                 total_under_money_line: parseInt(odd.under_money) || null,
                 draw_money_line: parseInt(odd.draw_money_line) || null,
-                last_update_on: new Date(odd.last_update)
+                last_update_on: moment.tz(odd.last_update, "America/Los_Angeles").tz('America/New_York')
               }, next);
             });
           }, function (err) {
