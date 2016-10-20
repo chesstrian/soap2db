@@ -2,9 +2,30 @@ var cookieParser = require('cookie-parser');
 var debug = require('debug');
 var express = require('express');
 var favicon = require('serve-favicon');
+var hbs = require('hbs');
 var http = require('http');
 var morgan = require('morgan');
 var path = require('path');
+
+/* Handlebars helpers */
+var blocks = {};
+
+hbs.registerHelper('extend', function(name, context) {
+  var block = blocks[name];
+  if (!block) {
+    block = blocks[name] = [];
+  }
+
+  block.push(context.fn(this));
+});
+
+hbs.registerHelper('block', function(name) {
+  var val = (blocks[name] || []).join('\n');
+
+  // clear the block
+  blocks[name] = [];
+  return val;
+});
 
 var app = express();
 var logger = debug('web:main');
@@ -26,6 +47,8 @@ app.use('/', routes);
 
 io.on('connection', function (socket) {
   console.log('Connected');
+
+  // TODO: Connect to logs from services
 });
 
 run = function () {

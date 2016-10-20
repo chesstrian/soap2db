@@ -15,10 +15,12 @@ router.get('/', basicAuth('monitor', 'w3bs3cur1ty'), function (req, res) {
         .catch(function (err) {
           console.log(err);
           sql.close();
+          res.render('index', {title: 'Service Monitor', counts: {events: 0, participants: 0, odds: 0}, error: true});
         });
     })
     .catch(function (err) {
       console.log(err);
+      res.render('index', {title: 'Service Monitor', counts: {events: 0, participants: 0, odds: 0}, error: true});
     });
 });
 
