@@ -55,23 +55,23 @@
       <div class="col-lg-4">
         <div class="ibox float-e-margins">
           <div class="ibox-title">
-            <span class="label label-{{#if error}}danger{{else}}primary{{/if}} pull-right">SQL Data</span>
-            <h5>Rows in main tables</h5>
+            <span id="status-title" class="label label-primary pull-right">SQL Server</span>
+            <h5>Rows in tables</h5>
           </div>
           <div class="ibox-content">
             <div class="row">
               <div class="col-xs-4">
                 <small class="stats-label">Events</small>
-                <h4>{{counts.events}}</h4>
+                <h4 id="events">{{counts.events}}</h4>
               </div>
 
               <div class="col-xs-4">
                 <small class="stats-label">Participants</small>
-                <h4>{{counts.participants}}</h4>
+                <h4 id="participants">{{counts.participants}}</h4>
               </div>
               <div class="col-xs-4">
                 <small class="stats-label">Odds</small>
-                <h4>{{counts.odds}}</h4>
+                <h4 id="odds">{{counts.odds}}</h4>
               </div>
             </div>
           </div>

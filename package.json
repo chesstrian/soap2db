@@ -1,6 +1,6 @@
 {
   "name": "soap2db",
-  "version": "2.0.0-dev",
+  "version": "2.0.0",
   "private": true,
   "description": "Node Service to take data from a Soap service and save into a MS-SQL Database",
   "main": "run.js",

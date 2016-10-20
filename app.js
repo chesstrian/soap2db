@@ -1,3 +1,4 @@
+var config = require('config');
 var cookieParser = require('cookie-parser');
 var debug = require('debug');
 var express = require('express');
@@ -6,6 +7,7 @@ var hbs = require('hbs');
 var http = require('http');
 var morgan = require('morgan');
 var path = require('path');
+var sql = require('mssql');
 
 /* Handlebars helpers */
 var blocks = {};
@@ -28,7 +30,7 @@ hbs.registerHelper('block', function(name) {
 });
 
 var app = express();
-var logger = debug('web:main');
+var logger = debug('app:web');
 var routes = require('./web/routes');
 var server = http.Server(app);
 
@@ -46,9 +48,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 io.on('connection', function (socket) {
-  console.log('Connected');
+  if (socket.handshake.headers['user-agent'] != 'node-XMLHttpRequest') {
+    socket.join('subscribers');
+  }
 
-  // TODO: Connect to logs from services
+  socket.on('server:log', function (message) {
+    io.to('subscribers').emit('client:log', message);
+  });
+
+  socket.on('server:added', function (added) {
+    io.to('subscribers').emit('client:added', added);
+  });
+
+  socket.on('count', function () {
+    sql.connect(config.get("mssql_uri"))
+      .then(function () {
+        new sql.Request().query("SELECT (SELECT COUNT(*) FROM Event) AS events, (SELECT COUNT(*) FROM Participant) AS participants, (SELECT COUNT(*) FROM Odds) AS odds")
+          .then(function (recordSet) {
+            io.to('subscribers').emit('client:count', recordSet[0]);
+          })
+          .catch(function (err) {
+            console.log(err);
+            sql.close();
+            io.to('subscribers').emit('client:count', {events: 0, participants: 0, odds: 0, error: true});
+          });
+      })
+      .catch(function (err) {
+        console.log(err);
+        io.to('subscribers').emit('client:count', {events: 0, participants: 0, odds: 0, error: true});
+      });
+  });
+
 });
 
 run = function () {
