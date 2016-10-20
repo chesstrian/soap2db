@@ -32,7 +32,6 @@ module.exports = function () {
       }
 
       console.log('Processing', odds.length, 'Odds');
-      console.log(odds);
 
       sql.connect(config.get("mssql_uri"))
         .then(function () {
