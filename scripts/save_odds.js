@@ -25,7 +25,7 @@ module.exports = function () {
 
     console.log('Token:', token);
 
-    lib.getOdds(token, null, null, moment(new Date()).format(), function (err, odds) {
+    lib.getOdds(token, null, null, moment.tz(new Date(), "America/New_York").format(), function (err, odds) {
       if (err) {
         console.log(err);
         return;
@@ -76,7 +76,7 @@ module.exports = function () {
                 total_over_money_line: parseInt(odd.over_money) || null,
                 total_under_money_line: parseInt(odd.under_money) || null,
                 draw_money_line: parseInt(odd.draw_money_line) || null,
-                last_update_on: moment.tz(odd.last_update, "America/Los_Angeles").tz('America/New_York')
+                last_update_on: new Date(moment.tz(odd.last_update, "America/Los_Angeles").tz("America/New_York").format())
               }, next);
             });
           }, function (err) {

@@ -79,8 +79,8 @@ module.exports = function () {
                     is_prop: event.is_prop == 'true' ? 1 : 0,
                     in_game: event.in_game == 'true' ? 1 : 0,
                     league_id: parseInt(event.league_id),
-                    scheduled_time: moment.tz(event.scheduled_time, "America/Los_Angeles").tz('America/New_York'),
-                    start_time: moment.tz(event.start_time, "America/Los_Angeles").tz('America/New_York'),
+                    scheduled_time: new Date(moment.tz(event.scheduled_time, "America/Los_Angeles").tz("America/New_York").format()),
+                    start_time: new Date(moment.tz(event.start_time, "America/Los_Angeles").tz("America/New_York").format()),
                     reference_id: parseInt(event.id)
                   }, next);
                 }, function (err) {
