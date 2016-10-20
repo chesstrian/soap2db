@@ -32,6 +32,7 @@ module.exports = function () {
       }
 
       console.log('Processing', odds.length, 'Odds');
+      console.log(odds);
 
       sql.connect(config.get("mssql_uri"))
         .then(function () {
@@ -76,7 +77,7 @@ module.exports = function () {
                 total_over_money_line: parseInt(odd.over_money) || null,
                 total_under_money_line: parseInt(odd.under_money) || null,
                 draw_money_line: parseInt(odd.draw_money_line) || null,
-                last_update_on: new Date(moment.tz(odd.last_update, "America/Los_Angeles").tz("America/New_York").format())
+                last_update_on: lib.pst2est(odd.last_update)
               }, next);
             });
           }, function (err) {
