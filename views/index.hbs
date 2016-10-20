@@ -1,0 +1,69 @@
+<div class="wrapper wrapper-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="ibox float-e-margins">
+          <div class="ibox-content">
+            <div>
+              <h3 class="font-bold no-margins">
+                Database update service monitor
+              </h3>
+              <small>Log output</small>
+            </div>
+
+            <div class="m-t-sm">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div>
+                    <pre>Output goes here!</pre>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="m-t-md">
+              <small class="pull-right">
+                <i class="fa fa-clock-o"> </i>
+                Update on 16.07.2015
+              </small>
+              <small>
+                <strong>Next run:</strong> Not yet implemented.
+              </small>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-warning pull-right">SQL Data</span>
+            <h5>Rows in main tables</h5>
+          </div>
+          <div class="ibox-content">
+            <div class="row">
+              <div class="col-xs-4">
+                <small class="stats-label">Events</small>
+                <h4>{{ counts.events }}</h4>
+              </div>
+
+              <div class="col-xs-4">
+                <small class="stats-label">Participants</small>
+                <h4>{{ counts.participants }}</h4>
+              </div>
+              <div class="col-xs-4">
+                <small class="stats-label">Odds</small>
+                <h4>{{ counts.odds }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
