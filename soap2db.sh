@@ -15,15 +15,15 @@
 
 
 start(){
-    DEBUG=app:* forever start /home/user/soap2db/run.js
+    NODE_CONFIG_DIR=/home/feeder/public_html/app/config/ DEBUG=app:* forever start /home/feeder/public_html/app/run.js
 }
 
 stop(){
-    forever stop /home/user/soap2db/run.js
+    forever stop /home/feeder/public_html/app/run.js
 }
 
 restart(){
-    forever restart /home/user/soap2db/run.js
+    NODE_CONFIG_DIR=/home/feeder/public_html/app/config/ DEBUG=app:* forever restart /home/feeder/public_html/app/run.js
 }
 
 case "$1" in

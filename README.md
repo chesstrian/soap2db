@@ -26,4 +26,4 @@ service soap2db start
 
 ## Access
 
-Go to http://server:3000/ in a browser, check `web/routes.js` at line 7.
+Go to [http://server:3000/](http://server:3000/) in a browser, check `web/routes.js` at line 7.
